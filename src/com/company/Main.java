@@ -184,30 +184,44 @@ public class Main extends Application {
 
     public void handleWriteToEvents(ActionEvent event) {
         try {
-            BufferedWriter eventWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/events.txt"));
-
-            //eric use this method to get the input from the text box (userbox)
+            BufferedWriter eventWriter = new BufferedWriter(new FileWriter(events, true));
+            eventWriter.write(eventBox.getText());
+            eventWriter.newLine();
+            eventWriter.flush();
+            eventWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        eventBox.clear();
     }
 
-    public void handleWriteToRooms(ActionEvent event) {
+    public void handleWriteToLocations(ActionEvent event) {
         try {
-            BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/rooms.txt"));
-
+            BufferedWriter roomWriter = new BufferedWriter(new FileWriter(rooms, true));
+            roomWriter.write(locationBox.getText());
+            roomWriter.newLine();
+            roomWriter.flush();
+            roomWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        locationBox.clear();
     }
 
     public void handleWriteToUsers(ActionEvent event) {
         try {
-            BufferedWriter userWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/users.txt"));
-
+            BufferedWriter userWriter = new BufferedWriter(new FileWriter(users, true));
+            userWriter.write(userBox.getText());
+            userWriter.newLine();
+            userWriter.flush();
+            userWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        userBox.clear();
     }
 
 }
