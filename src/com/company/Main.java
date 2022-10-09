@@ -1,6 +1,7 @@
 package com.company;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,11 +11,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.*;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Main extends Application {
     Group groupHomePage = new Group();
     Group groupAdminPage = new Group();
+    Group groupEmployeeInt = new Group();
 
     Label admin = new Label("Administrator Sign In:");
     TextField adminUsername = new TextField();
@@ -22,6 +28,11 @@ public class Main extends Application {
 
     Scene signInPage = new Scene(groupHomePage, 800, 600);
     Scene adminPage = new Scene(groupAdminPage, 800, 600);
+    Scene employeeInterface = new Scene(groupEmployeeInt, 800, 600);
+
+    File users = new File("src/com/company/serverInternals/users.txt");
+    File rooms = new File("src/com/company/serverInternals/rooms.txt");
+    File events = new File("src/com/company/serverInternals/events.txt");
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -90,6 +101,7 @@ public class Main extends Application {
             stage.setScene(signInPage);
         });
 
+
         groupHomePage.getChildren().addAll(welcome, admin, adminUsername, adminPassword, adminSubmit, employee);
     }
 
@@ -104,11 +116,12 @@ public class Main extends Application {
 
     Button returnToHome = new Button("Return to Home Page");
 
-    public void generateAdminPage(){
+    Button enterUser = new Button("Submit User");
+    Button enterLocation = new Button("Submit Location");
+    Button enterEvent = new Button("Submit Event");
+
+    public void generateAdminPage() {
         Label adminIdentifier = new Label("Administrator Page");
-        Button enterUser = new Button("Submit User");
-        Button enterLocation = new Button("Submit Location");
-        Button enterEvent = new Button("Submit Event");
 
         adminPage.setFill(new LinearGradient(
                 0, 0, 1, 1, true, CycleMethod.NO_CYCLE,
@@ -158,11 +171,43 @@ public class Main extends Application {
             enterEvent.setLayoutX(600 + xOffset);
             enterEvent.setLayoutY(165);
 
-
-
         }
+
+
+        enterUser.setOnAction(this::handleWriteToUsers);
+        enterLocation.setOnAction(this::handleWriteToRooms);
+        enterEvent.setOnAction(this::handleWriteToEvents);
 
         groupAdminPage.getChildren().addAll(adminIdentifier, returnToHome, addUsers, addLocations, addEvents, userBox, locationBox,
                 eventBox, enterUser, enterLocation, enterEvent);
     }
+
+    public void handleWriteToEvents(ActionEvent event) {
+        try {
+            BufferedWriter eventWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/events.txt"));
+
+            //eric use this method to get the input from the text box (userbox)
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleWriteToRooms(ActionEvent event) {
+        try {
+            BufferedWriter roomWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/rooms.txt"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleWriteToUsers(ActionEvent event) {
+        try {
+            BufferedWriter userWriter = new BufferedWriter(new FileWriter("src/com/company/serverInternals/users.txt"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
