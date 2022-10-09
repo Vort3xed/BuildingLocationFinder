@@ -388,7 +388,7 @@ public class Main extends Application {
             Setup.setDropdown(locationDropDown, 137, 230);
 
             Setup.setButton(cancelRequest, "Cancel", false, 155, 525);
-            Setup.setTextbox(timeScheduled, "Time", false, 113, 310);
+            Setup.setTextField(timeScheduled, "Time", false, 113, 310);
             Setup.setButton(postEvent, "Post Event", false, 145, 380);
         }
 
